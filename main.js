@@ -1,14 +1,18 @@
 import express from "express";
-import getAllUsers from "./src/db.js";
+import connect from "./src/db.js";
+import authRouter from "./src/routes/auth.js";
 
 const app = express();
-const port = 1984;
+const port = process.env.PORT;
 
-app.get("/user", (req, res) => {
-    getAllUsers();
-    
-    // console.log(users[0])
-})
+// Database connection
+connect();
+
+// Json parser
+app.use(express.json());
+
+// Login / Register API
+app.use("/", authRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

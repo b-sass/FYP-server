@@ -1,27 +1,15 @@
-import mysql from "mysql";
+import mongoose from "mongoose";
 
-const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'test',
-    password : 'pass',
-    database : 'test'
-});
+const URL = process.env.DB_URL
 
-function getAllUsers() {
-    let sql = "SELECT * FROM user"
-    let users;
-    connection.query(sql, (err, res, rows) => {
-        return (res);
+const connect = () => {
+    mongoose.connect(URL)
+    .then(() => {
+      console.log('Connected to MongoDB');
     })
-}
+    .catch((error) => {
+      console.error('Error connecting to MongoDB:', error);
+    });
+};
 
-async function getUser(ID) {
-    connection.connect();
-
-    
-
-    connection.end();
-}
-
-
-export default getAllUsers;
+export default connect;

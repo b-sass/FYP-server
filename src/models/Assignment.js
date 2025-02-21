@@ -31,4 +31,4 @@ const assignmentSchema = new Schema({
     },
 });
 
-export default assignmentSchema;
+export default mongoose.model("Assignment", assignmentSchema);
