@@ -13,7 +13,7 @@ const createToken = (username, email) => {
 const VerifyToken = (req, res, next) => {
     let tokenHeader = req.headers.authorization;
     let token = tokenHeader && tokenHeader.split(" ")[1];
-    
+
     if (token === null) {
         return res.status(401).json({ message: "Unauthorized" });
     }
@@ -23,8 +23,7 @@ const VerifyToken = (req, res, next) => {
         if (err) {
             return res.status(422).json({ err })
         }
-        req.id = user.id;
-        req.type = user.type;
+        req.email = user.email;
         next();
     });
 };

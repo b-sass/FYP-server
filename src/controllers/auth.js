@@ -4,10 +4,10 @@ import User from "../models/User.js";
 
 async function Register(req, res) {
     const {  username, email, password } = req.body;
-    console.log(`My ID is: ${id}`);
+    console.log(`My email is: ${email}`);
     try {
 
-        let newUser = new Patient({
+        let newUser = new User({
             username,
             email,
             password,
@@ -78,7 +78,7 @@ async function Login(req, res) {
 
         res.status(200).json({
             status: "success",
-            userToken: createToken(user.id),
+            userToken: createToken(user.email),
             message: "Login successful"
         });
     } catch (err) {
