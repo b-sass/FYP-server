@@ -1,9 +1,7 @@
 import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import { Register, Login } from "../controllers/auth.js";
+import { VerifyToken } from "../middleware/token.js";
 
-const secret = process.env.TOKEN_SECRET;
 const router = express.Router();
 
 router.post(
