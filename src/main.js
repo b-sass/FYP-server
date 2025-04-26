@@ -1,12 +1,12 @@
 import express from "express";
-import connect from "./src/db.js";
-import authRouter from "./src/routes/auth.js";
+// import connect from "./src/db.js";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 const port = process.env.PORT;
 
 // Database connection
-connect();
+// connect();
 
 // Json parser
 app.use(express.json());
