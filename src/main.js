@@ -9,7 +9,7 @@ const port = process.env.PORT;
 mongoose.promise = global.Promise;
 mongoose.set("strictQuery", false);
 mongoose
-    .connect(process.env.DB_URI)
+    .connect(process.env.DB_URL)
     .then(console.log("Connected to database."))
     .catch((err) => console.log(err));
 
