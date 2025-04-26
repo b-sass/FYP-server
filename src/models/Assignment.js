@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import { Schema, model } from "mongoose";
 
 const assignmentSchema = new Schema({
     name: {
@@ -31,4 +30,4 @@ const assignmentSchema = new Schema({
     },
 });
 
-export default mongoose.model("Assignment", assignmentSchema);
+export default model("Assignment", assignmentSchema);

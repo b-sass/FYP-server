@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import { Schema, model } from "mongoose";
 
 const targetSchema = new Schema({
     name: {
@@ -41,4 +40,4 @@ const sessionSchema = new Schema({
     },
 });
 
-export default mongoose.model("Session", sessionSchema);
+export default model("Session", sessionSchema);
