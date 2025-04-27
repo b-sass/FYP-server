@@ -1,0 +1,32 @@
+import Session from "../models/Session.js";
+
+let createSession = async (req, res) => {
+    const { name, target, startDate, endDate, tasks } = req.body;
+    const userEmail = req.email;
+
+    try {
+        let session = new Session({
+            name: name,
+            target: target,
+            startDate: startDate,
+            endDate: endDate,
+            tasks: tasks,
+            users: [userEmail],
+        });
+
+        await session.save()
+        res.status(200).json({
+            status: "success",
+            message: "Session created."
+        });
+    } catch (err) {
+        console.log("ERR:" + err);
+        res.status(500).json({
+            status: "error",
+            error: [err],
+            message: "Internal Server Error",
+        })
+    }
+}
+
+export default { createSession };

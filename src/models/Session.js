@@ -41,4 +41,4 @@ const sessionSchema = new Schema({
     },
 });
 
-export default model("Session", sessionSchema);
+export default model("sessions", sessionSchema);

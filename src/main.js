@@ -1,5 +1,6 @@
 import express from "express";
 import authRouter from "./routes/auth.js";
+import sessionRouter from "./routes/session.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -23,6 +24,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRouter);
+app.use("/api", sessionRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

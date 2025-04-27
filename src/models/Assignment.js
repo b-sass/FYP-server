@@ -30,4 +30,4 @@ const assignmentSchema = new Schema({
     },
 });
 
-export default model("Assignment", assignmentSchema);
+export default model("assignments", assignmentSchema);
