@@ -90,7 +90,7 @@ async function Login(req, res) {
         console.log(`password: ${password}`);
         console.log(`password hash: ${user.password}`);
         // Compare passwords
-        const match = bcrypt.compareSync(password, user.password);
+        const match = bcrypt.compare(password, user.password);
         
         console.log(`match: ${match}`);
         if (!match) {
