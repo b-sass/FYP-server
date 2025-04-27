@@ -1,5 +1,25 @@
 import Session from "../models/Session.js";
 
+let getSessions = async (req, res) => {
+    const userEmail = req.email;
+
+    try {
+        let sessions = await Session.find({ users: userEmail });
+        res.status(200).json({
+            status: "success",
+            message: "Sessions retrieved.",
+            sessions: sessions,
+        });
+    } catch (err) {
+        console.log("ERR:" + err);
+        res.status(500).json({
+            status: "error",
+            error: [err],
+            message: "Internal Server Error",
+        })
+    }
+}
+
 let createSession = async (req, res) => {
     const { name, target, startDate, endDate, tasks } = req.body;
     const userEmail = req.email;
