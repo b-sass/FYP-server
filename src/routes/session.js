@@ -4,6 +4,12 @@ import session from "../controllers/session.js";
 
 let router = express.Router();
 
+router.get(
+    "/session",
+    VerifyToken,
+    session.getSessions
+)
+
 router.post(
     "/session",
     VerifyToken,

@@ -49,4 +49,4 @@ let createSession = async (req, res) => {
     }
 }
 
-export default { createSession };
+export default { getSessions, createSession };
