@@ -1,6 +1,8 @@
 import express from "express";
 import authRouter from "./routes/auth.js";
 import mongoose from "mongoose";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = process.env.PORT;
