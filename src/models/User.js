@@ -1,7 +1,7 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const mfa = new Schema({
+const mfa = new mongoose.Schema({
     secret: {
         type: String,
         default: "",
@@ -13,7 +13,7 @@ const mfa = new Schema({
 });
 
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         minLength: 5,
@@ -54,4 +54,4 @@ userSchema.pre("save", function (next) {
     });
 });
 
-export default model("User", userSchema);
+export default mongoose.model("users", userSchema);

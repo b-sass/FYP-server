@@ -59,7 +59,7 @@ const Verify2FA = async (req, res) => {
 
         if (token) {
             // Verify the JWT token
-            jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            jwt.verify(token, process.env.TOKEN_SECRET, async (err, decoded) => {
                 if (err) {
                     return res.status(401).json({ message: "Invalid or expired token" });
                 }

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.TOKEN_SECRET;
 
 const createToken = (username, email) => {
     // Create token

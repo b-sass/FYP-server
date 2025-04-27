@@ -7,6 +7,27 @@ async function Register(req, res) {
     console.log(`My email is: ${email}`);
     try {
 
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                status: "failed",
+                message: "Please provide all required fields. [username, email, password]"
+            });
+        }
+
+        if (username.length < 5) {
+            return res.status(400).json({
+                status: "failed",
+                message: "Username must be at least 5 characters long."
+            });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({
+                status: "failed",
+                message: "Password must be at least 8 characters long."
+            });
+        }
+
         let newUser = new User({
             username,
             email,
@@ -22,12 +43,18 @@ async function Register(req, res) {
             });
         }
 
+        existingUser = await User.findOne({ "username": username })
+        
+        if (existingUser) {
+            return res.status(400).json({
+                status: "failed",
+                message: "An account with this username exists already, please pick a different username."
+            });
+        }
+
         // Save user to database
         const savedUser = await newUser.save();
-        console.log(`1: ${savedUser}`);
         const { ...user_data } = savedUser;
-        
-        console.log(`2: ${savedUser}`);
         res.status(200).json({
             status: "success",
             message: "Registration complete."
@@ -47,6 +74,9 @@ async function Login(req, res) {
     const { email, password } = req.body;
 
     try {
+        console.log(`My email is: ${email}`);
+        console.log(`My password is: ${password}`);
+
         let user = await User.findOne({ "email": email });
 
         if (!user) {
@@ -56,10 +86,13 @@ async function Login(req, res) {
                 message: "User does not exist"
             });
         }
-        
+
+        console.log(`password: ${password}`);
+        console.log(`password hash: ${user.password}`);
         // Compare passwords
-        const match = await bcrypt.compare(password, user.password);
+        const match = bcrypt.compareSync(password, user.password);
         
+        console.log(`match: ${match}`);
         if (!match) {
             return res.status(400).json({
                 status: "failed",
@@ -72,13 +105,13 @@ async function Login(req, res) {
         if (user.mfa?.verified) {
             return res.status(303).json({
                 status: "see other",
-                message: "2FA Enabled for this account | see GET /auth/mfa/:type"
+                message: "2FA Enabled for this account | see GET /auth/mfa"
             });
         }
 
         res.status(200).json({
             status: "success",
-            userToken: createToken(user.email),
+            userToken: createToken(user.username, user.email),
             message: "Login successful"
         });
     } catch (err) {
