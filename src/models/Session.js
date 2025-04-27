@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const targetSchema = new Schema({
+const taskSchema = new Schema({
     name: {
         type: String,
         require: true,
@@ -12,6 +12,7 @@ const targetSchema = new Schema({
     completed: {
         type: Boolean,
         require: true,
+        default: false,
     },
 });
 
@@ -20,7 +21,7 @@ const sessionSchema = new Schema({
         type: String,
         require: true,
     },
-    description: {
+    target: {
         type: String,
     },
     startDate: {
@@ -31,11 +32,11 @@ const sessionSchema = new Schema({
         type: Date,
         require: true,
     },
-    targets: {
-        type: [targetSchema],
+    tasks: {
+        type: [taskSchema],
     },
-    user: {
-        type: String,
+    users: {
+        type: [String],
         require: true,
     },
 });
