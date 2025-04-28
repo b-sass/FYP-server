@@ -16,4 +16,10 @@ router.post(
     session.createSession
 )
 
+router.put(
+    "/session",
+    VerifyToken,
+    session.updateSession
+)
+
 export default router;
